@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using checkpoint8.Models;
 
 namespace checkpoint8.Services
 {
-    public class StepsService
+  public class StepsService
+  {
+    internal List<Step> GetStepsForRecipe(int id)
     {
-        
+      throw new NotImplementedException();
     }
+  }
 }

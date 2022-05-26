@@ -8,6 +8,7 @@ namespace checkpoint8.Models
     public string SubTitle { get; set; }
     public string Category { get; set; }
     public string CreatorId { get; set; }
+    public Account Creator { get; set; }
   }
 
   public class FavoritesViewModel : Recipe

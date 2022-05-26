@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using checkpoint8.Models;
 
 namespace checkpoint8.Services
 {
-    public class IngredientsService
+  public class IngredientsService
+  {
+    internal List<Ingredient> GetIngredientsForRecipe(int id)
     {
-        
+      throw new NotImplementedException();
     }
+  }
 }
