@@ -1,11 +1,19 @@
 using System;
 using System.Collections.Generic;
 using checkpoint8.Models;
+using checkpoint8.Repositories;
 
 namespace checkpoint8.Services
 {
   public class RecipesService
   {
+    private readonly RecipesRepository _repo;
+
+    public RecipesService(RecipesRepository repo)
+    {
+      _repo = repo;
+    }
+
     internal List<Recipe> Get()
     {
       throw new NotImplementedException();
@@ -18,7 +26,7 @@ namespace checkpoint8.Services
 
     internal Recipe Create(Recipe recipeData)
     {
-      throw new NotImplementedException();
+      return _repo.Create(recipeData);
     }
 
     internal Recipe Edit(Recipe recipeData)

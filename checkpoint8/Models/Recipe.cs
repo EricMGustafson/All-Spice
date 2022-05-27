@@ -1,3 +1,5 @@
+using System;
+
 namespace checkpoint8.Models
 {
   public class Recipe
@@ -9,6 +11,8 @@ namespace checkpoint8.Models
     public string Category { get; set; }
     public string CreatorId { get; set; }
     public Account Creator { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
   }
 
   public class FavoritesViewModel : Recipe
