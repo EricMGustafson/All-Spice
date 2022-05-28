@@ -25,12 +25,13 @@ namespace checkpoint8.Controllers
       _ss = ss;
     }
     [HttpGet]
-    public ActionResult<List<Recipe>> Get()
+    public ActionResult<List<Recipe>> GetRecipes()
     {
       try
       {
-        List<Recipe> recipe = _rs.Get();
-        return Ok(recipe);
+        List<Recipe> recipes = _rs.Get();
+
+        return Ok(recipes);
       }
       catch (Exception e)
       {
@@ -44,32 +45,6 @@ namespace checkpoint8.Controllers
       {
         Recipe recipe = _rs.Get(id);
         return Ok(recipe);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-    [HttpGet("{id}/ingredients")]
-    public ActionResult<List<Ingredient>> getIngredients(int id)
-    {
-      try
-      {
-        List<Ingredient> ingredients = _ins.GetIngredientsForRecipe(id);
-        return Ok(ingredients);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-    [HttpGet("{id}/steps")]
-    public ActionResult<List<Step>> getSteps(int id)
-    {
-      try
-      {
-        List<Step> steps = _ss.GetStepsForRecipe(id);
-        return Ok(id);
       }
       catch (Exception e)
       {

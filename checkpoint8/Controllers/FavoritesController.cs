@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using checkpoint8.Models;
 using checkpoint8.Services;
@@ -9,22 +10,35 @@ using Microsoft.AspNetCore.Mvc;
 namespace checkpoint8.Controllers
 {
   [ApiController]
-  [Route("api/recipes/{ recipeId }/ingredients")]
-  public class IngredientsController : ControllerBase
+  [Route("api/[controller]")]
+  public class FavoritesController : ControllerBase
   {
-    private readonly IngredientsService _ins;
+    private readonly FavoritesService _fs;
 
-    public IngredientsController(IngredientsService ins)
+    public FavoritesController(FavoritesService fs)
     {
-      _ins = ins;
+      _fs = fs;
     }
-    [HttpGet("{id}")]
-    public ActionResult<Ingredient> Get(int id)
+    [HttpGet]
+    public ActionResult<List<Favorite>> GetFavorites()
     {
       try
       {
-        Ingredient ingredient = _ins.Get(id);
-        return Ok(ingredient);
+        List<Favorite> favorite = _fs.Get();
+        return Ok(favorite);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{id}")]
+    public ActionResult<Favorite> Get(int id)
+    {
+      try
+      {
+        Favorite favorite = _fs.Get(id);
+        return Ok(favorite);
       }
       catch (Exception e)
       {
@@ -33,30 +47,15 @@ namespace checkpoint8.Controllers
     }
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Ingredient>> Create([FromBody] Ingredient ingredientData)
+    public async Task<ActionResult<Favorite>> Create([FromBody] Favorite favoriteData)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        ingredientData.CreatorId = userInfo.Id;
-        Ingredient newIngredient = _ins.Create(ingredientData);
-        return Ok(newIngredient);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-    [HttpPut("{id}")]
-    [Authorize]
-    public async Task<ActionResult<Ingredient>> Edit(int id, [FromBody] Ingredient ingredientData)
-    {
-      try
-      {
-        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        ingredientData.CreatorId = userInfo.Id;
-        Ingredient ingredient = _ins.Edit(ingredientData);
-        return Ok(ingredient);
+        favoriteData.AccountId = userInfo.Id;
+        Favorite favorite = _fs.Create(favoriteData);
+        favorite.Creator = userInfo;
+        return Ok(favorite);
       }
       catch (Exception e)
       {
@@ -70,7 +69,7 @@ namespace checkpoint8.Controllers
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        _ins.Delete(id, userInfo.Id);
+        _fs.Delete(id, userInfo.Id);
         return Ok("Deleted...");
       }
       catch (Exception e)
