@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace checkpoint8.Controllers
 {
   [ApiController]
-  [Route("api/recipes")]
+  [Route("api/[controller]")]
   public class RecipesController : ControllerBase
   {
     private readonly RecipesService _rs;
@@ -45,6 +45,32 @@ namespace checkpoint8.Controllers
       {
         Recipe recipe = _rs.Get(id);
         return Ok(recipe);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{id}/ingredients")]
+    public ActionResult<Ingredient> GetIngredients(int id)
+    {
+      try
+      {
+        List<Ingredient> ingredients = _ins.GetIngredientsForRecipe(id);
+        return Ok(ingredients);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{id}/steps")]
+    public ActionResult<Step> GetSteps(int id)
+    {
+      try
+      {
+        List<Step> steps = _ss.GetStepsForRecipe(id);
+        return Ok(steps);
       }
       catch (Exception e)
       {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace checkpoint8.Controllers
 {
   [ApiController]
-  [Route("api/recipes/{ recipeId }/ingredients")]
+  [Route("api/recipes/{ recipeId }/[controller]")]
   public class IngredientsController : ControllerBase
   {
     private readonly IngredientsService _ins;

@@ -24,7 +24,7 @@ namespace checkpoint8.Repositories
     }
     internal Ingredient Get(int id)
     {
-      string sql = "SELECT i.*, a.* FROM ingredients i JOIN accounts a ON i.creatorId = a.id WHERE i.id = @id";
+      string sql = "SELECT i.*, a.* FROM ingredients i JOIN accounts a ON i.creatorId = a.id WHERE i.id = @id;";
       return _db.Query<Ingredient, Account, Ingredient>(sql, (ingredient, account) =>
       {
         ingredient.Creator = account;
@@ -39,7 +39,7 @@ namespace checkpoint8.Repositories
     }
     internal void Edit(Ingredient original)
     {
-      string sql = "UPDATE ingredients SET name = @Name, quantity = @Quantity WHERE id = @Id";
+      string sql = "UPDATE ingredients SET name = @Name, quantity = @Quantity WHERE id = @Id;";
       _db.Execute(sql, original);
     }
     internal void Delete(int id)

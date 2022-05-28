@@ -24,7 +24,7 @@ namespace checkpoint8.Repositories
     }
     internal Recipe Get(int id)
     {
-      string sql = "SELECT r.*, a.* FROM recipes r JOIN accounts a on r.creatorId = a.id WHERE r.id = @id";
+      string sql = "SELECT r.*, a.* FROM recipes r JOIN accounts a on r.creatorId = a.id WHERE r.id = @id;";
       return _db.Query<Recipe, Account, Recipe>(sql, (recipe, account) =>
       {
         recipe.Creator = account;
@@ -39,12 +39,12 @@ namespace checkpoint8.Repositories
     }
     internal void Edit(Recipe original)
     {
-      string sql = "UPDATE recipes SET category = @Category, picture = @Picture, subTitle = @SubTitle, title = @Title WHERE id = @Id";
+      string sql = "UPDATE recipes SET category = @Category, picture = @Picture, subTitle = @SubTitle, title = @Title WHERE id = @Id;";
       _db.Execute(sql, original);
     }
     internal void Delete(int id)
     {
-      string sql = "DELETE FROM recipes WHERE id = @id LIMIT 1";
+      string sql = "DELETE FROM recipes WHERE id = @id LIMIT 1;";
       _db.Execute(sql, new { id });
     }
   }
