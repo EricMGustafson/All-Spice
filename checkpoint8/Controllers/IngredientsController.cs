@@ -13,7 +13,6 @@ namespace checkpoint8.Controllers
   public class IngredientsController : ControllerBase
   {
     private readonly IngredientsService _ins;
-
     public IngredientsController(IngredientsService ins)
     {
       _ins = ins;

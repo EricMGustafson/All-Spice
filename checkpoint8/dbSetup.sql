@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS favorites(
 -- SELECT r.*, a.* FROM recipes r JOIN accounts a ON r.creatorId = a.id;
 
 --Get Recipe by Id
--- SELECT r.*, a.* FROM recipes r JOIN accounts a on r.creatorId = a.id WHERE r.id = @id;
+-- SELECT r.*, a.* FROM recipes r JOIN accounts a ON r.creatorId = a.id WHERE r.id = @id;
 
 --Put Recipe
 -- UPDATE recipes SET category = @Category, picture = @Picture, subTitle = @SubTitle, title = @Title WHERE id = @Id;
@@ -98,6 +98,21 @@ CREATE TABLE IF NOT EXISTS favorites(
 
 --Post Favorite
 -- INSERT INTO favorites (recipeId, accountId) VALUES (3, "627582ed8300624c500e3d8a"); SELECT LAST_INSERT_ID();
+
+--Get Ingredient For Recipe
+  -- SELECT a.*, i.* FROM ingredients i JOIN accounts a ON i.creatorId = a.id WHERE i.recipeId = @id;
+
+--Get Ingredient by Id
+-- SELECT i.*, a.* FROM ingredients i JOIN accounts a ON i.creatorId = a.id WHERE i.id = @id;
+
+--Post Ingredient
+-- INSERT INTO ingredients (name, quantity, creatorId, recipeId) VALUES ("Eggs", "3", "627582ed8300624c500e3d8a", 3); SELECT LAST_INSERT_ID();
+
+--Put Ingredient
+-- UPDATE ingredients SET name = @Name, quantity = @Quantity WHERE id = @Id;
+
+--Delete Ingredient
+-- DELETE FROM ingredients WHERE id = @id LIMIT 1;
 
 --Get Favorite
 -- SELECT a.id, r.id, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";

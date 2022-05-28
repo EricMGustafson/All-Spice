@@ -9,12 +9,10 @@ namespace checkpoint8.Repositories
   public class RecipesRepository
   {
     private readonly IDbConnection _db;
-
     public RecipesRepository(IDbConnection db)
     {
       _db = db;
     }
-
     internal List<Recipe> Get()
     {
       string sql = "SELECT r.*, a.* FROM recipes r JOIN accounts a ON r.creatorId = a.id;";
@@ -24,7 +22,6 @@ namespace checkpoint8.Repositories
         return recipe;
       }).ToList();
     }
-
     internal Recipe Get(int id)
     {
       string sql = "SELECT r.*, a.* FROM recipes r JOIN accounts a on r.creatorId = a.id WHERE r.id = @id";
@@ -34,20 +31,17 @@ namespace checkpoint8.Repositories
         return recipe;
       }, new { id }).FirstOrDefault();
     }
-
     internal Recipe Create(Recipe recipeData)
     {
       string sql = "INSERT INTO recipes (picture, title, subTitle, category, creatorId) VALUES (@Picture, @Title, @SubTitle, @Category, @CreatorId); SELECT LAST_INSERT_ID();";
       recipeData.Id = _db.ExecuteScalar<int>(sql, recipeData);
       return recipeData;
     }
-
     internal void Edit(Recipe original)
     {
       string sql = "UPDATE recipes SET category = @Category, picture = @Picture, subTitle = @SubTitle, title = @Title WHERE id = @Id";
       _db.Execute(sql, original);
     }
-
     internal void Delete(int id)
     {
       string sql = "DELETE FROM recipes WHERE id = @id LIMIT 1";

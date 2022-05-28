@@ -8,17 +8,14 @@ namespace checkpoint8.Services
   public class RecipesService
   {
     private readonly RecipesRepository _repo;
-
     public RecipesService(RecipesRepository repo)
     {
       _repo = repo;
     }
-
     internal List<Recipe> Get()
     {
       return _repo.Get();
     }
-
     internal Recipe Get(int id)
     {
       Recipe recipe = _repo.Get(id);
@@ -28,12 +25,10 @@ namespace checkpoint8.Services
       }
       return recipe;
     }
-
     internal Recipe Create(Recipe recipeData)
     {
       return _repo.Create(recipeData);
     }
-
     internal Recipe Edit(Recipe recipeData)
     {
       Recipe original = Get(recipeData.Id);
@@ -48,7 +43,6 @@ namespace checkpoint8.Services
       _repo.Edit(original);
       return Get(original.Id);
     }
-
     internal void Delete(int id, string userId)
     {
       Recipe recipe = Get(id);
