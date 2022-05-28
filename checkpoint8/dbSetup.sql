@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS ingredients(
 
 CREATE TABLE IF NOT EXISTS steps(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  posistion INT,
+  position INT,
   body TEXT NOT NULL,
   recipeId INT NOT NULL,
   creatorId VARCHAR(255) NOT NULL,
@@ -74,8 +74,6 @@ CREATE TABLE IF NOT EXISTS favorites(
     ON DELETE CASCADE
 
 ) default charset utf8;
-
-
 
 --Practice Area
 
@@ -116,3 +114,6 @@ CREATE TABLE IF NOT EXISTS favorites(
 
 --Get Favorite
 -- SELECT a.id, r.id, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+
+--Get Favorite by Account
+SELECT a.id AS accountId, r.id AS recipeId, f.id FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";

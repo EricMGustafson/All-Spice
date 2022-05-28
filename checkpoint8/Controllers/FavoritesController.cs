@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace checkpoint8.Controllers
 {
   [ApiController]
-  [Route("api/[controller]")]
+  [Route("account/[controller]")]
   public class FavoritesController : ControllerBase
   {
     private readonly FavoritesService _fs;
@@ -19,19 +19,6 @@ namespace checkpoint8.Controllers
     {
       _fs = fs;
     }
-    [HttpGet]
-    public ActionResult<List<Favorite>> GetFavorites()
-    {
-      try
-      {
-        List<Favorite> favorite = _fs.Get();
-        return Ok(favorite);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
     [HttpGet("{id}")]
     public ActionResult<Favorite> Get(int id)
     {
@@ -39,6 +26,19 @@ namespace checkpoint8.Controllers
       {
         Favorite favorite = _fs.Get(id);
         return Ok(favorite);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    public async Task<ActionResult<List<FavoritesViewModel>>> GetFavoritesByAccount()
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        List<FavoritesViewModel> favorites = _fs.GetFavoritesByAccount(userInfo.Id);
+        return Ok(favorites);
       }
       catch (Exception e)
       {

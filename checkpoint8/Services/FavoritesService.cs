@@ -12,10 +12,6 @@ namespace checkpoint8.Services
     {
       _repo = repo;
     }
-    internal List<Favorite> Get()
-    {
-      return _repo.Get();
-    }
     internal Favorite Get(int id)
     {
       Favorite favorite = _repo.Get(id);
@@ -24,6 +20,10 @@ namespace checkpoint8.Services
         throw new Exception("Invalid Favorite Id.");
       }
       return favorite;
+    }
+    internal List<FavoritesViewModel> GetFavoritesByAccount(string id)
+    {
+      return _repo.GetFavoritesByAccount(id);
     }
     internal Favorite Create(Favorite favoriteData)
     {

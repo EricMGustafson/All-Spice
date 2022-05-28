@@ -39,6 +39,7 @@ namespace checkpoint8.Controllers
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         stepData.CreatorId = userInfo.Id;
         Step newStep = _ss.Create(stepData);
+        newStep.Creator = userInfo;
         return Ok(newStep);
       }
       catch (Exception e)

@@ -13,9 +13,12 @@ namespace checkpoint8.Controllers
   public class AccountController : ControllerBase
   {
     private readonly AccountService _accountService;
-    public AccountController(AccountService accountService)
+    private readonly FavoritesService _fs;
+
+    public AccountController(AccountService accountService, FavoritesService fs)
     {
       _accountService = accountService;
+      _fs = fs;
     }
 
     [HttpGet]

@@ -85,9 +85,9 @@ namespace checkpoint8.Controllers
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         recipeData.CreatorId = userInfo.Id;
-        Recipe recipe = _rs.Create(recipeData);
-        recipe.Creator = userInfo;
-        return Ok(recipe);
+        Recipe newRecipe = _rs.Create(recipeData);
+        newRecipe.Creator = userInfo;
+        return Ok(newRecipe);
       }
       catch (Exception e)
       {
