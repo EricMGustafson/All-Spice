@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS favorites(
 -- SELECT f.*, a.* FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.id = 4;
 
 --Get Favorite by Account
-SELECT a.*, r.*, f.* FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+-- SELECT f.*, r.title, a.id AS creatorId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+-- SELECT f.*, a.* FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
 
-SELECT f.*, a.id AS creatorId FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+-- SELECT act.*, r.*, f.recipeId, f.accountId, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts act ON r.creatorId = act.id WHERE f.accountId = "627582ed8300624c500e3d8a"
