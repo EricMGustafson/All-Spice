@@ -112,8 +112,10 @@ CREATE TABLE IF NOT EXISTS favorites(
 --Delete Ingredient
 -- DELETE FROM ingredients WHERE id = @id LIMIT 1;
 
---Get Favorite
--- SELECT a.id, r.id, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+--Get Favorite By Id
+-- SELECT f.*, a.* FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.id = 4;
 
 --Get Favorite by Account
-SELECT a.id AS accountId, r.id AS recipeId, f.id FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+SELECT a.*, r.*, f.* FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
+
+SELECT f.*, a.id AS creatorId FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";

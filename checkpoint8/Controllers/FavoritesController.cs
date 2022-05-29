@@ -32,6 +32,7 @@ namespace checkpoint8.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpGet]
     public async Task<ActionResult<List<FavoritesViewModel>>> GetFavoritesByAccount()
     {
       try

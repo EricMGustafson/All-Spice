@@ -24,7 +24,7 @@ namespace checkpoint8.Repositories
     }
     internal List<FavoritesViewModel> GetFavoritesByAccount(string id)
     {
-      string sql = "SELECT a.*, a.id AS accountId, r.id AS recipeId, f.id FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts a ON r.creatorId = a.id WHERE f.accountId = @id;";
+      string sql = "SELECT f.*,  a.id AS creatorId FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.accountId = @id;";
       return _db.Query<Account, FavoritesViewModel, FavoritesViewModel>(sql, (account, favorite) =>
       {
         favorite.Creator = account;
