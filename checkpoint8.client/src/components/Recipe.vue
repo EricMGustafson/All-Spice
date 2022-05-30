@@ -1,19 +1,26 @@
 <template>
-  <div class="col-md-4 mt-5 d-flex justify-content-center">
-    <div :style="{ backgroundImage: `url(${recipe.picture})`}" class="recipe-card rounded shadow">
+  <div class="col-md-4 mt-4 d-flex justify-content-center">
+    <div
+      :style="{ backgroundImage: `url(${recipe.picture})` }"
+      class="recipe-card rounded shadow position-relative"
+    >
       <div class="h-100 d-flex flex-column justify-content-between">
-        <div class="d-flex justify-content-between m-3">
-          <div class=" rounded-pill bg-info pt-25">
-            <h3 class="px-3 mb-0">{{recipe.category}}</h3>
+        <div class="d-flex justify-content-between">
+          <div class="p-2">
+            <h5 class="rounded-pill bg-info px-3 pb-1">
+              {{ recipe.category }}
+            </h5>
           </div>
-          <div class="bg-info rounded-pill px-2">
-            <i v-if="favorite" class="mdi mdi-star mdi-48px text-danger"></i>
-            <i v-else class="mdi mdi-star-outline mdi-48px text-danger"></i>
+          <div class="bg-info rounded px-2 pt-1" @click.stop="addFavorite">
+            <h2>
+              <i v-if="favorite" class="mdi mdi-star text-danger"></i>
+              <i v-else class="mdi mdi-star-outline text-light"></i>
+            </h2>
           </div>
         </div>
-        <div class="rounded-pill bg-info m-3">
-            <h2 class="ms-4">{{recipe.title}}</h2>
-            <h3 class="ms-4">{{recipe.subTitle}}</h3>  
+        <div class="rounded bg-info m-2">
+          <h2 class="ms-2 mb-0">{{ recipe.title }}</h2>
+          <h3 class="ms-2 mb-0">{{ recipe.subTitle }}</h3>
         </div>
       </div>
     </div>
@@ -26,11 +33,15 @@ export default {
   props: {
     recipe: {
       type: Object,
-      required: true, 
+      required: true,
     }
   },
-  setup(){
-    return {}
+  setup() {
+    return {
+      addFavorite() {
+
+      },
+    }
   }
 }
 </script>
@@ -41,10 +52,10 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 40vh;
+  height: 50vh;
   width: 90%;
-  }
-.pt-25{
+}
+.pt-25 {
   padding-top: 20px;
 }
 </style>

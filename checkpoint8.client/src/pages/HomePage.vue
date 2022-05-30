@@ -1,7 +1,7 @@
 <template>
-<div class="row justify-content-center">
-  <div class="col-md-12 intro rounded shadow-lg position-relative">
-    <div class="pt-2 d-flex justify-content-between">
+<div class="row justify-content-center shadow">
+  <div class="col-md-12 intro rounded shadow position-relative">
+    <div class="intro-login pt-2 d-flex justify-content-between">
       <div>
         <Login />
       </div>
@@ -28,9 +28,11 @@
     </div>
   </div>
 </div>
-<div class="row mt-6 flex-wrap scrollable-y">
+<div class="row mt-4 flex-wrap scrollable-y">
   <Recipe v-for="r in recipes" :key="r.id" :recipe="r"/>
 </div>
+
+
 </template>
 
 <script>
@@ -65,6 +67,9 @@ export default {
   width: 97vw;
   margin-top: 2.5vh;
 }
+.intro-login{
+  height: 5vh;
+}
 .intro-text{
   height: 25vh;
 }
@@ -77,8 +82,9 @@ p{
 }
 .filter-bar {
   width: 33%;
-  height: 8vh;
+  height: 10vh;
   right: 33%;
+  z-index: 10;
 }
 .mt-6 {
   margin-top: 4em;
