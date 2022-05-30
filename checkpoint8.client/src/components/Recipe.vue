@@ -1,8 +1,11 @@
 <template>
-  <div class="col-md-4 mt-4 d-flex justify-content-center">
+  <div class="col-md-4 mt-5 d-flex justify-content-center">
     <div
       :style="{ backgroundImage: `url(${recipe.picture})` }"
-      class="recipe-card rounded shadow position-relative"
+      class="recipe-card rounded shadow position-relative selectable"
+      data-bs-toggle="modal"
+      :data-bs-target="'#rid-' + recipe.id"
+      @click.stop="setActiveRecipe(recipe)"
     >
       <div class="h-100 d-flex flex-column justify-content-between">
         <div class="d-flex justify-content-between">
@@ -25,10 +28,27 @@
       </div>
     </div>
   </div>
+  <DetailsModal :id="'rid-' + recipe.id">
+    <template #picture>
+      <div
+        class="modal-pic square-right rounded"
+        :style="{ backgroundImage: `url(${recipe.picture})` }"
+      ></div>
+    </template>
+    <template #title>{{ recipe.title }}</template>
+    <template #category>{{ recipe.category }}</template>
+    <template #subTitle>{{ recipe.subTitle }}</template>
+    <template #creator>Submitted by: {{ recipe.creator.name }}</template>
+    <template #steps><Steps /></template>
+    <template #ingredients><Ingredients /></template>
+  </DetailsModal>
 </template>
 
 
 <script>
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   props: {
     recipe: {
@@ -38,9 +58,13 @@ export default {
   },
   setup() {
     return {
+      setActiveRecipe(recipe) {
+        AppState.activeRecipe = recipe
+        logger.log(AppState.activeRecipe.id)
+      },
       addFavorite() {
 
-      },
+      }
     }
   }
 }
@@ -57,5 +81,15 @@ export default {
 }
 .pt-25 {
   padding-top: 20px;
+}
+.modal-pic {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+p {
+  margin-bottom: 0;
 }
 </style>
