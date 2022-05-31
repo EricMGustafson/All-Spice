@@ -24,16 +24,23 @@ namespace checkpoint8.Repositories
     }
     internal List<FavoritesViewModel> GetFavoritesByAccount(string id)
     {
-      string sql = "SELECT act.*, r.*, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts act ON r.creatorId = act.id WHERE f.accountId = @id;";
+      string sql = @"SELECT
+                        act.*,
+                        r.*,
+                        f.id AS favoriteId
+                      FROM favorites f
+                      JOIN recipes r ON f.recipeId = r.id
+                      JOIN accounts act ON r.creatorId = act.id
+                      WHERE f.accountId = @id";
       return _db.Query<Account, FavoritesViewModel, FavoritesViewModel>(sql, (account, favorite) =>
       {
         favorite.Creator = account;
         return favorite;
       }, new { id }).ToList();
     }
-    internal Favorite Create(Favorite favoriteData)
+    internal FavoritesViewModel Create(FavoritesViewModel favoriteData)
     {
-      string sql = "INSERT INTO favorites (recipeId, accountId) VALUES (@RecipeId, @AccountId); SELECT LAST_INSERT_ID();";
+      string sql = "INSERT INTO favorites (recipeId, accountId) VALUES (@RecipeId, @AccountId); SELECT LAST_INSERT_ID()";
       favoriteData.Id = _db.ExecuteScalar<int>(sql, favoriteData);
       return favoriteData;
     }

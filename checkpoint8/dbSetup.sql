@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS favorites(
 -- DELETE FROM recipes WHERE id = @id LIMIT 1;
 
 --Post Favorite
--- INSERT INTO favorites (recipeId, accountId) VALUES (3, "627582ed8300624c500e3d8a"); SELECT LAST_INSERT_ID();
+INSERT INTO favorites (recipeId, accountId) VALUES (3, "627582ed8300624c500e3d8a"); SELECT LAST_INSERT_ID();
 
 --Get Ingredient For Recipe
   -- SELECT a.*, i.* FROM ingredients i JOIN accounts a ON i.creatorId = a.id WHERE i.recipeId = @id;
@@ -120,3 +120,8 @@ CREATE TABLE IF NOT EXISTS favorites(
 -- SELECT f.*, a.* FROM favorites f JOIN accounts a ON f.accountId = a.id WHERE f.accountId = "627582ed8300624c500e3d8a";
 
 -- SELECT act.*, r.*, f.recipeId, f.accountId, f.id AS favoriteId FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts act ON r.creatorId = act.id WHERE f.accountId = "627582ed8300624c500e3d8a"
+
+
+
+
+SELECT r.*, f.id AS favoriteId, act.* FROM favorites f JOIN recipes r ON f.recipeId = r.id JOIN accounts act ON r.creatorId = act.id WHERE f.accountId = "627582ed8300624c500e3d8a";

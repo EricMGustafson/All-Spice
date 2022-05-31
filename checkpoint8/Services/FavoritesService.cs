@@ -25,16 +25,8 @@ namespace checkpoint8.Services
     {
       return _repo.GetFavoritesByAccount(id);
     }
-    internal Favorite Create(Favorite favoriteData)
+    internal FavoritesViewModel Create(FavoritesViewModel favoriteData)
     {
-      List<FavoritesViewModel> favorites = GetFavoritesByAccount(favoriteData.AccountId);
-      for (int i = 0; i < favorites.Count; i++)
-      {
-        if (favoriteData.RecipeId == favorites[i].Id)
-        {
-          throw new Exception("You have already favorited this recipe.");
-        }
-      }
       return _repo.Create(favoriteData);
     }
     internal void Delete(int id, string userId)

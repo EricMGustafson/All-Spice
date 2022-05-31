@@ -51,10 +51,8 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12 d-flex justify-content-end">
-                    <div>
-                      <p class="me-1"><slot name="creator"></slot></p>
-                    </div>
+                  <div class="col-12 d-flex justify-content-between">
+                    <slot name="creator"></slot>
                   </div>
                 </div>
               </div>
@@ -82,7 +80,7 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 60vw;
+    max-width: 70vw;
     margin: 1.75rem auto;
   }
 }

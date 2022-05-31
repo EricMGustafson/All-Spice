@@ -52,6 +52,14 @@
   <div class="row mt-4 flex-wrap scrollable-y">
     <Recipe v-for="r in recipes" :key="r.id" :recipe="r" />
   </div>
+  <div
+    class="position-absolute add-btn bg-info text-center selectable"
+    data-bs-toggle="modal"
+    data-bs-target="#newRecipeModal"
+  >
+    <i class="mdi mdi-plus mdi-48px"></i>
+  </div>
+  <RecipeModal />
 </template>
 
 <script>
@@ -62,12 +70,14 @@ import { recipesService } from '../services/RecipesService'
 import { AppState } from '../AppState'
 import { stepsService } from '../services/StepsService'
 import { ingredientsService } from '../services/IngredientsService'
+import { favoritesService } from '../services/FavoritesService'
 export default {
   name: 'Home',
   setup() {
     onMounted(async () => {
       try {
         await recipesService.getAllRecipes()
+        await favoritesService.getAccountFavorites()
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
@@ -127,5 +137,11 @@ p {
 }
 .modal {
   top: 30vh;
+}
+.add-btn {
+  bottom: 1%;
+  border-radius: 50%;
+  width: 4rem;
+  right: 1%;
 }
 </style>
