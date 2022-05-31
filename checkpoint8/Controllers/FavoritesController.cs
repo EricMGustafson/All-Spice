@@ -48,13 +48,13 @@ namespace checkpoint8.Controllers
     }
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Favorite>> Create([FromBody] Favorite favoriteData)
+    public async Task<ActionResult<FavoritesViewModel>> Create([FromBody] FavoritesViewModel favoriteData)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        favoriteData.AccountId = userInfo.Id;
-        Favorite favorite = _fs.Create(favoriteData);
+        favoriteData.CreatorId = userInfo.Id;
+        FavoritesViewModel favorite = _fs.Create(favoriteData);
         favorite.Creator = userInfo;
         return Ok(favorite);
       }
